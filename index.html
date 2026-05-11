@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>FF14 LaGeshi团队团建生成器</title>
+    <title>FF14 Lashi团队固定队生成器</title>
     <style>
         * {
             margin: 0;
@@ -58,7 +58,6 @@
             border-bottom: 1px solid rgba(255, 215, 0, 0.3);
             text-align: center;
         }
-        /* 随机副本展示 */
         .raid-dungeon {
             text-align: center;
             font-size: 16px;
@@ -69,14 +68,12 @@
             margin-bottom: 15px;
             border: 1px solid rgba(255,215,0,0.25);
         }
-        /* 副本选择单独行 */
         .dungeon-select-wrap {
             width: 100%;
             margin-bottom: 15px;
             display: flex;
             align-items: center;
             gap: 8px;
-            background: rgba255, 255, 255, 0.05;
             background: rgba(255, 255, 255, 0.05);
             padding: 12px;
             border-radius: 8px;
@@ -253,7 +250,6 @@
             background: rgba(231, 76, 60, 0.1);
             border-radius: 6px;
         }
-        /* 平板适配 */
         @media (min-width: 768px) {
             .team-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -270,8 +266,6 @@
 
         <div class="section">
             <h2 class="section-title">队伍与副本设置</h2>
-
-            <!-- 副本选择下拉 -->
             <div class="dungeon-select-wrap">
                 <label>选择副本：</label>
                 <select id="dungeonSelect">
@@ -308,8 +302,8 @@
             <div class="player-input-area">
                 <div class="player-input">
                     <label>玩家1：</label>
-                    <input type="text" placeholder="输入玩家昵称" id="player1Name" required>
-                    <select id="player1Job" required>
+                    <input type="text" placeholder="输入玩家昵称" id="player1Name">
+                    <select id="player1Job">
                         <option value="">选择初始职能</option>
                         <option value="tank">防护（T）</option>
                         <option value="healer">治疗（H）</option>
@@ -319,8 +313,8 @@
                 </div>
                 <div class="player-input">
                     <label>玩家2：</label>
-                    <input type="text" placeholder="输入玩家昵称" id="player2Name" required>
-                    <select id="player2Job" required>
+                    <input type="text" placeholder="输入玩家昵称" id="player2Name">
+                    <select id="player2Job">
                         <option value="">选择初始职能</option>
                         <option value="tank">防护（T）</option>
                         <option value="healer">治疗（H）</option>
@@ -330,8 +324,8 @@
                 </div>
                 <div class="player-input">
                     <label>玩家3：</label>
-                    <input type="text" placeholder="输入玩家昵称" id="player3Name" required>
-                    <select id="player3Job" required>
+                    <input type="text" placeholder="输入玩家昵称" id="player3Name">
+                    <select id="player3Job">
                         <option value="">选择初始职能</option>
                         <option value="tank">防护（T）</option>
                         <option value="healer">治疗（H）</option>
@@ -341,8 +335,8 @@
                 </div>
                 <div class="player-input">
                     <label>玩家4：</label>
-                    <input type="text" placeholder="输入玩家昵称" id="player4Name" required>
-                    <select id="player4Job" required>
+                    <input type="text" placeholder="输入玩家昵称" id="player4Name">
+                    <select id="player4Job">
                         <option value="">选择初始职能</option>
                         <option value="tank">防护（T）</option>
                         <option value="healer">治疗（H）</option>
@@ -352,8 +346,8 @@
                 </div>
                 <div class="player-input">
                     <label>玩家5：</label>
-                    <input type="text" placeholder="输入玩家昵称" id="player5Name" required>
-                    <select id="player5Job" required>
+                    <input type="text" placeholder="输入玩家昵称" id="player5Name">
+                    <select id="player5Job">
                         <option value="">选择初始职能</option>
                         <option value="tank">防护（T）</option>
                         <option value="healer">治疗（H）</option>
@@ -363,8 +357,8 @@
                 </div>
                 <div class="player-input">
                     <label>玩家6：</label>
-                    <input type="text" placeholder="输入玩家昵称" id="player6Name" required>
-                    <select id="player6Job" required>
+                    <input type="text" placeholder="输入玩家昵称" id="player6Name">
+                    <select id="player6Job">
                         <option value="">选择初始职能</option>
                         <option value="tank">防护（T）</option>
                         <option value="healer">治疗（H）</option>
@@ -374,8 +368,8 @@
                 </div>
                 <div class="player-input">
                     <label>玩家7：</label>
-                    <input type="text" placeholder="输入玩家昵称" id="player7Name" required>
-                    <select id="player7Job" required>
+                    <input type="text" placeholder="输入玩家昵称" id="player7Name">
+                    <select id="player7Job">
                         <option value="">选择初始职能</option>
                         <option value="tank">防护（T）</option>
                         <option value="healer">治疗（H）</option>
@@ -385,8 +379,8 @@
                 </div>
                 <div class="player-input">
                     <label>玩家8：</label>
-                    <input type="text" placeholder="输入玩家昵称" id="player8Name" required>
-                    <select id="player8Job" required>
+                    <input type="text" placeholder="输入玩家昵称" id="player8Name">
+                    <select id="player8Job">
                         <option value="">选择初始职能</option>
                         <option value="tank">防护（T）</option>
                         <option value="healer">治疗（H）</option>
@@ -398,15 +392,13 @@
             <div class="error-tip" id="errorTip">请填写完整8位玩家的昵称和初始职能！</div>
             <div class="btn-container">
                 <button id="generateBtn">生成固定队伍</button>
-                <button id="resetBtn">重置输入</button>
+                <button id="resetBtn">重置所有内容</button>
             </div>
         </div>
 
         <div class="section team-result" id="teamResult">
             <h2 class="section-title">生成的固定队伍</h2>
-            <!-- 随机副本显示区域 -->
             <div class="raid-dungeon" id="raidDungeon">本次挑战副本：--</div>
-
             <div class="team-grid">
                 <div class="job-group">
                     <h3 class="job-group-title">防护职业（2人）</h3>
@@ -434,197 +426,173 @@
     <script>
         // 副本列表
         const dungeonList = [
-            "艳翼蛇鸟歼殛战",
-            "佐拉加歼殛战",
-            "泽莲尼娅歼殛战",
-            "永恒女王歼殛战",
-            "永远之暗悲惶歼殛战",
-            "格莱杨拉波尔歼殛战",
-            "恩欧歼殛战",
+            "艳翼蛇鸟歼殛战","佐拉加歼殛战","泽莲尼娅歼殛战","永恒女王歼殛战",
+            "永远之暗悲惶歼殛战","格莱杨拉波尔歼殛战","恩欧歼殛战",
             "M1S","M2S","M3S","M4S","M5S","M6S","M7S","M8S","M9S","M10S","M11S","M12S",
-            "巴哈姆特绝境战",
-            "究极神兵绝境战",
-            "亚历山大绝境战",
-            "幻想龙诗绝境战",
-            "欧米茄绝境验证战",
-            "光暗未来绝境战",
-            "妖星乱舞绝境战"
+            "巴哈姆特绝境战","究极神兵绝境战","亚历山大绝境战","幻想龙诗绝境战",
+            "欧米茄绝境验证战","光暗未来绝境战","妖星乱舞绝境战"
         ];
 
         const fixedJobs = {
             tank: ['骑士', '战士', '暗黑骑士', '绝枪战士'],
             healer: ['白魔法师', '占星术士', '贤者', '学者'],
             dps_melee: ['武士', '武僧', '忍者', '蝰蛇剑士', '龙骑士', '钐镰客'],
-            dps_ranged: {
-                group1: ['吟游诗人', '舞者', '机工士'],
-                group2: ['绘灵法师', '黑魔法师', '召唤师', '赤魔法师']
-            }
+            dps_ranged: { group1: ['吟游诗人', '舞者', '机工士'], group2: ['绘灵法师', '黑魔法师', '召唤师', '赤魔法师'] }
         };
 
-        // 获取最终副本：有选择用选择，无选择随机
+        // ====================== 本地缓存功能 ======================
+        const INPUT_KEY = "FF14_TEAM_INPUT_DATA";
+
+        // 保存输入到本地
+        function saveInputToLocal(){
+            let data = {
+                dungeon: document.getElementById('dungeonSelect').value,
+                players: []
+            };
+            for(let i=1; i<=8; i++){
+                data.players.push({
+                    name: document.getElementById(`player${i}Name`).value,
+                    job: document.getElementById(`player${i}Job`).value
+                });
+            }
+            localStorage.setItem(INPUT_KEY, JSON.stringify(data));
+        }
+
+        // 从本地加载输入
+        function loadInputFromLocal(){
+            let data = localStorage.getItem(INPUT_KEY);
+            if(!data) return;
+            data = JSON.parse(data);
+            document.getElementById('dungeonSelect').value = data.dungeon || '';
+            data.players.forEach((p, i)=>{
+                if(document.getElementById(`player${i+1}Name`)){
+                    document.getElementById(`player${i+1}Name`).value = p.name || '';
+                    document.getElementById(`player${i+1}Job`).value = p.job || '';
+                }
+            });
+        }
+
+        // 监听输入变化自动保存
+        function bindAutoSave(){
+            document.getElementById('dungeonSelect').addEventListener('change', saveInputToLocal);
+            for(let i=1; i<=8; i++){
+                document.getElementById(`player${i}Name`).addEventListener('input', saveInputToLocal);
+                document.getElementById(`player${i}Job`).addEventListener('change', saveInputToLocal);
+            }
+        }
+
+        // ====================== 核心功能 ======================
         function getFinalDungeon(){
-            const selectVal = document.getElementById('dungeonSelect').value.trim();
-            if(selectVal) return selectVal;
-            const idx = Math.floor(Math.random() * dungeonList.length);
-            return dungeonList[idx];
+            const v = document.getElementById('dungeonSelect').value.trim();
+            return v || dungeonList[Math.floor(Math.random() * dungeonList.length)];
         }
 
         function shuffleArray(arr) {
-            let newArr = [...arr];
-            for (let i = newArr.length - 1; i > 0; i--) {
+            let a = [...arr];
+            for (let i = a.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
-                [newArr[i], newArr[j]] = [newArr[j], newArr[i]];
+                [a[i], a[j]] = [a[j], a[i]];
             }
-            return newArr;
+            return a;
         }
 
         function getUniqueFixedJobs(list, count) {
-            const shuffled = shuffleArray(list);
-            return shuffled.slice(0, count);
+            return shuffleArray(list).slice(0, count);
         }
 
-        function getJobText(jobKey) {
-            const jobMap = {
-                tank: '防护（T）',
-                healer: '治疗（H）',
-                dps_melee: '近战DPS',
-                dps_ranged: '远程DPS'
-            };
-            return jobMap[jobKey] || jobKey;
+        function getJobText(k) {
+            const m = {tank:'防护（T）',healer:'治疗（H）',dps_melee:'近战DPS',dps_ranged:'远程DPS'};
+            return m[k]||k;
         }
 
         function collectPlayers() {
-            const players = [];
-            for (let i = 1; i <= 8; i++) {
-                const nameInput = document.getElementById(`player${i}Name`);
-                const jobSelect = document.getElementById(`player${i}Job`);
-                const name = nameInput.value.trim();
-                const job = jobSelect.value;
-
-                if (!name || !job) {
-                    return null;
-                }
-
-                players.push({
-                    name: name,
-                    originalJob: job,
-                    originalJobText: getJobText(job)
-                });
+            let ps = [];
+            for(let i=1;i<=8;i++){
+                const n = document.getElementById(`player${i}Name`).value.trim();
+                const j = document.getElementById(`player${i}Job`).value;
+                if(!n || !j) return null;
+                ps.push({name:n, originalJob:j, originalJobText:getJobText(j)});
             }
-            return players;
+            return ps;
         }
 
         function assignJobs(players) {
-            const result = {
-                tank: [],
-                healer: [],
-                dps_melee: [],
-                dps_ranged: []
-            };
-            const usedJobs = new Set();
-            const shuffledPlayers = shuffleArray(players);
+            const res = {tank:[],healer:[],dps_melee:[],dps_ranged:[]};
+            const used = new Set();
+            const sp = shuffleArray(players);
 
-            const tankJobs = getUniqueFixedJobs(fixedJobs.tank, 2);
-            assignJobType('tank', tankJobs, shuffledPlayers, result, usedJobs);
+            const tj = getUniqueFixedJobs(fixedJobs.tank,2);
+            assign('tank',tj,sp,res,used);
 
-            const healerJobs = getUniqueFixedJobs(fixedJobs.healer, 2);
-            assignJobType('healer', healerJobs, shuffledPlayers, result, usedJobs);
+            const hj = getUniqueFixedJobs(fixedJobs.healer,2);
+            assign('healer',hj,sp,res,used);
 
-            const meleeJobs = getUniqueFixedJobs(fixedJobs.dps_melee, 2);
-            assignJobType('dps_melee', meleeJobs, shuffledPlayers, result, usedJobs);
+            const mj = getUniqueFixedJobs(fixedJobs.dps_melee,2);
+            assign('dps_melee',mj,sp,res,used);
 
-            const rangedJobs = [];
-            const group1Job = shuffleArray(fixedJobs.dps_ranged.group1)[0];
-            usedJobs.add(group1Job);
-            rangedJobs.push(group1Job);
+            const rj = [shuffleArray(fixedJobs.dps_ranged.group1)[0]];
+            let g2;
+            do{g2=shuffleArray(fixedJobs.dps_ranged.group2)[0]}while(used.has(g2));
+            rj.push(g2);
+            assign('dps_ranged',rj,sp,res,used);
 
-            let group2Job;
-            do {
-                group2Job = shuffleArray(fixedJobs.dps_ranged.group2)[0];
-            } while (usedJobs.has(group2Job));
-            usedJobs.add(group2Job);
-            rangedJobs.push(group2Job);
-
-            assignJobType('dps_ranged', rangedJobs, shuffledPlayers, result, usedJobs);
-
-            return result;
+            return res;
         }
 
-        function assignJobType(jobType, jobList, players, result, usedJobs) {
-            let assignedCount = 0;
-            const availablePlayers = players.filter(player => player.originalJob !== jobType);
-            const shuffledAvailable = shuffleArray(availablePlayers);
-
-            for (const job of jobList) {
-                if (assignedCount >= jobList.length) break;
-                const targetPlayer = shuffledAvailable.find(player =>
-                    !Object.values(result).flat().some(p => p.name === player.name)
-                );
-                if (targetPlayer) {
-                    targetPlayer.newJob = job;
-                    targetPlayer.newJobText = job;
-                    if (jobType === 'tank') result.tank.push(targetPlayer);
-                    else if (jobType === 'healer') result.healer.push(targetPlayer);
-                    else if (jobType === 'dps_melee') result.dps_melee.push(targetPlayer);
-                    else if (jobType === 'dps_ranged') result.dps_ranged.push(targetPlayer);
-                    usedJobs.add(job);
-                    assignedCount++;
-                }
+        function assign(t,list,p,res,used){
+            let c=0;
+            const av = p.filter(x=>x.originalJob!==t);
+            const sa = shuffleArray(av);
+            for(const j of list){
+                if(c>=list.length)break;
+                const tar = sa.find(x=>!Object.values(res).flat().some(m=>m.name===x.name));
+                if(tar){tar.newJob=j;res[t].push(tar);used.add(j);c++;}
             }
         }
 
-        function renderTeam(result) {
-            // 渲染副本
-            document.getElementById('raidDungeon').innerText = '本次挑战副本：' + getFinalDungeon();
-
-            function renderList(listId, data, typeName) {
-                const el = document.getElementById(listId);
-                el.innerHTML = '';
-                data.forEach(p => {
-                    const li = document.createElement('li');
-                    li.className = 'player-item';
-                    li.innerHTML = `
-                        <span>${p.name}</span>
-                        <span>原职能：${p.originalJobText} → 新职能：${typeName}（${p.newJobText}）</span>
-                    `;
+        function renderTeam(res){
+            document.getElementById('raidDungeon').innerText = '本次挑战副本：'+getFinalDungeon();
+            function r(id,dt,t){
+                const el=document.getElementById(id);el.innerHTML='';
+                dt.forEach(p=>{
+                    const li=document.createElement('li');li.className='player-item';
+                    li.innerHTML=`<span>${p.name}</span><span>原职能：${p.originalJobText} → 新职能：${t}（${p.newJob}）</span>`;
                     el.appendChild(li);
                 });
             }
-
-            renderList('tankList', result.tank, '防护');
-            renderList('healerList', result.healer, '治疗');
-            renderList('meleeList', result.dps_melee, '近战DPS');
-            renderList('rangedList', result.dps_ranged, '远程DPS');
+            r('tankList',res.tank,'防护');
+            r('healerList',res.healer,'治疗');
+            r('meleeList',res.dps_melee,'近战DPS');
+            r('rangedList',res.dps_ranged,'远程DPS');
         }
 
-        function resetInput() {
-            // 重置副本选择
+        // 重置所有
+        function resetAll(){
+            localStorage.removeItem(INPUT_KEY);
             document.getElementById('dungeonSelect').value = '';
-            for (let i = 1; i <= 8; i++) {
-                document.getElementById(`player${i}Name`).value = '';
-                document.getElementById(`player${i}Job`).value = '';
+            for(let i=1;i<=8;i++){
+                document.getElementById(`player${i}Name`).value='';
+                document.getElementById(`player${i}Job`).value='';
             }
-            document.getElementById('errorTip').style.display = 'none';
-            document.getElementById('teamResult').style.display = 'none';
-            document.getElementById('raidDungeon').innerText = '本次挑战副本：--';
+            document.getElementById('errorTip').style.display='none';
+            document.getElementById('teamResult').style.display='none';
+            document.getElementById('raidDungeon').innerText='本次挑战副本：--';
         }
 
-        window.onload = function() {
-            document.getElementById('generateBtn').addEventListener('click', function() {
-                const players = collectPlayers();
-                if (!players) {
-                    document.getElementById('errorTip').style.display = 'none';
-                    document.getElementById('errorTip').style.display = 'block';
-                    document.getElementById('teamResult').style.display = 'none';
-                    return;
-                }
-                document.getElementById('errorTip').style.display = 'none';
-                const teamResult = assignJobs(players);
-                renderTeam(teamResult);
-                document.getElementById('teamResult').style.display = 'block';
-            });
+        // 初始化
+        window.onload = function(){
+            loadInputFromLocal();
+            bindAutoSave();
 
-            document.getElementById('resetBtn').addEventListener('click', resetInput);
+            document.getElementById('generateBtn').onclick = ()=>{
+                const ps = collectPlayers();
+                if(!ps){document.getElementById('errorTip').style.display='block';return;}
+                document.getElementById('errorTip').style.display='none';
+                renderTeam(assignJobs(ps));
+                document.getElementById('teamResult').style.display='block';
+            };
+
+            document.getElementById('resetBtn').onclick = resetAll;
         };
     </script>
 </body>
