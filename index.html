@@ -58,6 +58,51 @@
             border-bottom: 1px solid rgba(255, 215, 0, 0.3);
             text-align: center;
         }
+        /* 随机副本展示 */
+        .raid-dungeon {
+            text-align: center;
+            font-size: 16px;
+            color: #ffd700;
+            background: rgba(255,215,0,0.1);
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border: 1px solid rgba(255,215,0,0.25);
+        }
+        /* 副本选择单独行 */
+        .dungeon-select-wrap {
+            width: 100%;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba255, 255, 255, 0.05;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 12px;
+            border-radius: 8px;
+        }
+        .dungeon-select-wrap label {
+            font-size: 14px;
+            color: #ffd700;
+            width: 70px;
+            flex-shrink: 0;
+        }
+        #dungeonSelect {
+            flex: 1;
+            padding: 8px 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 6px;
+            background: rgba(0, 0, 0, 0.6);
+            color: #fff;
+            font-size: 13px;
+            outline: none;
+            min-width: 0;
+        }
+        #dungeonSelect option {
+            background: #333;
+            color: #fff;
+            font-size: 13px;
+        }
         .player-input-area {
             display: flex;
             flex-wrap: wrap;
@@ -80,7 +125,6 @@
             width: 70px;
             flex-shrink: 0;
         }
-        /* 输入框字体缩小 */
         .player-input input {
             flex: 1;
             padding: 8px 10px;
@@ -92,7 +136,6 @@
             outline: none;
             min-width: 0;
         }
-        /* 下拉框字体缩小 */
         .player-input select {
             flex: 1;
             padding: 8px 10px;
@@ -193,14 +236,6 @@
             font-weight: bold;
             color: #ffd700;
         }
-        .player-item .original-job {
-            color: #999;
-            font-size: 14px;
-        }
-        .player-item .new-job {
-            color: #4cd964;
-            font-weight: bold;
-        }
         .tip {
             text-align: center;
             font-size: 13px;
@@ -218,7 +253,6 @@
             background: rgba(231, 76, 60, 0.1);
             border-radius: 6px;
         }
-
         /* 平板适配 */
         @media (min-width: 768px) {
             .team-grid {
@@ -231,11 +265,46 @@
     <div class="container">
         <div class="header">
             <h1>FF14 Lashi团队固定队生成器</h1>
-            <p>输入8位玩家信息，随机生成符合职业规则的固定队伍，严格遵循指定职业范围，确保新职能不重复、不与初始职能冲突</p>
+            <p>输入8位玩家信息，可自选副本或随机副本，自动生成固定队伍</p>
         </div>
 
         <div class="section">
-            <h2 class="section-title">输入8位玩家信息</h2>
+            <h2 class="section-title">队伍与副本设置</h2>
+
+            <!-- 副本选择下拉 -->
+            <div class="dungeon-select-wrap">
+                <label>选择副本：</label>
+                <select id="dungeonSelect">
+                    <option value="">不选择，随机副本</option>
+                    <option value="艳翼蛇鸟歼殛战">艳翼蛇鸟歼殛战</option>
+                    <option value="佐拉加歼殛战">佐拉加歼殛战</option>
+                    <option value="泽莲尼娅歼殛战">泽莲尼娅歼殛战</option>
+                    <option value="永恒女王歼殛战">永恒女王歼殛战</option>
+                    <option value="永远之暗悲惶歼殛战">永远之暗悲惶歼殛战</option>
+                    <option value="格莱杨拉波尔歼殛战">格莱杨拉波尔歼殛战</option>
+                    <option value="恩欧歼殛战">恩欧歼殛战</option>
+                    <option value="M1S">M1S</option>
+                    <option value="M2S">M2S</option>
+                    <option value="M3S">M3S</option>
+                    <option value="M4S">M4S</option>
+                    <option value="M5S">M5S</option>
+                    <option value="M6S">M6S</option>
+                    <option value="M7S">M7S</option>
+                    <option value="M8S">M8S</option>
+                    <option value="M9S">M9S</option>
+                    <option value="M10S">M10S</option>
+                    <option value="M11S">M11S</option>
+                    <option value="M12S">M12S</option>
+                    <option value="巴哈姆特绝境战">巴哈姆特绝境战</option>
+                    <option value="究极神兵绝境战">究极神兵绝境战</option>
+                    <option value="亚历山大绝境战">亚历山大绝境战</option>
+                    <option value="幻想龙诗绝境战">幻想龙诗绝境战</option>
+                    <option value="欧米茄绝境验证战">欧米茄绝境验证战</option>
+                    <option value="光暗未来绝境战">光暗未来绝境战</option>
+                    <option value="妖星乱舞绝境战">妖星乱舞绝境战</option>
+                </select>
+            </div>
+
             <div class="player-input-area">
                 <div class="player-input">
                     <label>玩家1：</label>
@@ -335,6 +404,9 @@
 
         <div class="section team-result" id="teamResult">
             <h2 class="section-title">生成的固定队伍</h2>
+            <!-- 随机副本显示区域 -->
+            <div class="raid-dungeon" id="raidDungeon">本次挑战副本：--</div>
+
             <div class="team-grid">
                 <div class="job-group">
                     <h3 class="job-group-title">防护职业（2人）</h3>
@@ -360,6 +432,25 @@
     </div>
 
     <script>
+        // 副本列表
+        const dungeonList = [
+            "艳翼蛇鸟歼殛战",
+            "佐拉加歼殛战",
+            "泽莲尼娅歼殛战",
+            "永恒女王歼殛战",
+            "永远之暗悲惶歼殛战",
+            "格莱杨拉波尔歼殛战",
+            "恩欧歼殛战",
+            "M1S","M2S","M3S","M4S","M5S","M6S","M7S","M8S","M9S","M10S","M11S","M12S",
+            "巴哈姆特绝境战",
+            "究极神兵绝境战",
+            "亚历山大绝境战",
+            "幻想龙诗绝境战",
+            "欧米茄绝境验证战",
+            "光暗未来绝境战",
+            "妖星乱舞绝境战"
+        ];
+
         const fixedJobs = {
             tank: ['骑士', '战士', '暗黑骑士', '绝枪战士'],
             healer: ['白魔法师', '占星术士', '贤者', '学者'],
@@ -369,6 +460,14 @@
                 group2: ['绘灵法师', '黑魔法师', '召唤师', '赤魔法师']
             }
         };
+
+        // 获取最终副本：有选择用选择，无选择随机
+        function getFinalDungeon(){
+            const selectVal = document.getElementById('dungeonSelect').value.trim();
+            if(selectVal) return selectVal;
+            const idx = Math.floor(Math.random() * dungeonList.length);
+            return dungeonList[idx];
+        }
 
         function shuffleArray(arr) {
             let newArr = [...arr];
@@ -475,6 +574,9 @@
         }
 
         function renderTeam(result) {
+            // 渲染副本
+            document.getElementById('raidDungeon').innerText = '本次挑战副本：' + getFinalDungeon();
+
             function renderList(listId, data, typeName) {
                 const el = document.getElementById(listId);
                 el.innerHTML = '';
@@ -496,18 +598,22 @@
         }
 
         function resetInput() {
+            // 重置副本选择
+            document.getElementById('dungeonSelect').value = '';
             for (let i = 1; i <= 8; i++) {
                 document.getElementById(`player${i}Name`).value = '';
                 document.getElementById(`player${i}Job`).value = '';
             }
             document.getElementById('errorTip').style.display = 'none';
             document.getElementById('teamResult').style.display = 'none';
+            document.getElementById('raidDungeon').innerText = '本次挑战副本：--';
         }
 
         window.onload = function() {
             document.getElementById('generateBtn').addEventListener('click', function() {
                 const players = collectPlayers();
                 if (!players) {
+                    document.getElementById('errorTip').style.display = 'none';
                     document.getElementById('errorTip').style.display = 'block';
                     document.getElementById('teamResult').style.display = 'none';
                     return;
