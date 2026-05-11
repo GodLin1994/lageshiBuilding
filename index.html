@@ -296,6 +296,28 @@
             background: rgba(231, 76, 60, 0.1);
             border-radius: 6px;
         }
+        /* 截图区域专用样式 - 修复文字看不清 */
+        #captureWrap {
+            background: #000000; /* 纯黑实底，保证文字绝对清晰 */
+            padding: 20px;
+            border-radius: 12px;
+            border: 2px solid #ffd700;
+        }
+        .preview-img-wrap {
+            margin-top: 20px;
+            text-align: center;
+            display: none;
+        }
+        #previewImg {
+            max-width: 100%;
+            border: 2px solid rgba(255,215,0,0.3);
+            border-radius: 8px;
+        }
+        .save-tip {
+            font-size: 13px;
+            color: #4cd964;
+            margin-top: 8px;
+        }
         @media (min-width: 768px) {
             .team-grid { grid-template-columns: repeat(2, 1fr); }
         }
@@ -491,7 +513,7 @@
             <div class="btn-container">
                 <button id="generateBtn">生成固定队伍</button>
                 <button id="resetBtn">重置所有内容</button>
-                <button id="saveImgBtn">保存为图片</button>
+                <button id="saveImgBtn">生成并保存到相册</button>
             </div>
         </div>
         <div class="section team-result" id="teamResult">
@@ -524,6 +546,10 @@
                     通畅度规则：主职为基础，副职不限制；分配职能强制与自身主职不同
                 </div>
             </div>
+        </div>
+        <div class="preview-img-wrap" id="previewWrap">
+            <img id="previewImg" src="" alt="队伍分析图">
+            <div class="save-tip">💡 长按图片 → 保存图片 → 存入手机相册（QQ可用）</div>
         </div>
     </div>
     <script>
@@ -765,17 +791,32 @@
             document.getElementById('errorTip').style.display='none';
             document.getElementById('teamResult').style.display='none';
             document.getElementById('rankBox').innerHTML = '';
+            document.getElementById('previewWrap').style.display='none';
         }
-        function saveAsImage(){
+        // 适配QQ：Blob+预览+长按保存
+        function saveAsImageQQCompatible(){
             const wrap = document.getElementById('captureWrap');
+            const previewImg = document.getElementById('previewImg');
+            const previewWrap = document.getElementById('previewWrap');
+
             html2canvas(wrap,{
-                backgroundColor: null,
-                scale: 2
+                backgroundColor: "#000000", // 强制黑色背景
+                scale: 3, // 提高清晰度
+                useCORS: true,
+                logging: false
             }).then(canvas=>{
-                let link = document.createElement('a');
-                link.download = 'FF14团建队伍分析.png';
-                link.href = canvas.toDataURL('image/png');
-                link.click();
+                canvas.toBlob(blob=>{
+                    const url = URL.createObjectURL(blob);
+                    previewImg.src = url;
+                    previewWrap.style.display = 'block';
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'FF14团建队伍分析.png';
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    setTimeout(()=>URL.revokeObjectURL(url), 5000);
+                }, 'image/png');
             });
         }
         window.onload = function(){
@@ -792,7 +833,17 @@
                 renderTeam(teamRes);
             };
             document.getElementById('resetBtn').onclick = resetAll;
-            document.getElementById('saveImgBtn').onclick = saveAsImage;
+            document.getElementById('saveImgBtn').onclick = ()=>{
+                const ps = collectPlayers();
+                if(!ps){
+                    document.getElementById('errorTip').style.display='block';
+                    return;
+                }
+                document.getElementById('errorTip').style.display='none';
+                const teamRes = assignJobs(ps);
+                renderTeam(teamRes);
+                setTimeout(saveAsImageQQCompatible, 500);
+            };
         };
     </script>
 </body>
