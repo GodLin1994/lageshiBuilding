@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>FF14 LaGeshi团队团建生成器</title>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -129,8 +130,8 @@
             padding: 8px 10px;
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 6px;
-            background: rgba(0, 0, 0, 0.6);
-            color: #fff;
+            background: rgba(0, 0, 0, 0.6) !important;
+            color: #fff !important;
             font-size: 13px;
             outline: none;
         }
@@ -138,21 +139,32 @@
             padding: 8px 6px;
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 6px;
-            background: rgba(0, 0, 0, 0.6);
-            color: #fff;
+            background: rgba(0, 0, 0, 0.6) !important;
+            color: #fff !important;
             font-size: 13px;
             outline: none;
         }
         .player-input select option {
-            background: #333;
-            color: #fff;
+            background: #333 !important;
+            color: #fff !important;
             font-size: 13px;
         }
+        input:-webkit-autofill,
+        select:-webkit-autofill {
+            -webkit-box-shadow: 0 0 0 1000px rgba(0, 0, 0, 0.6) inset !important;
+            -webkit-text-fill-color: #fff !important;
+            transition: background-color 5000s ease-in-out 0s !important;
+        }
+        ::-webkit-input-placeholder { color: #ccc; }
+        :-moz-placeholder { color: #ccc; }
+        ::-moz-placeholder { color: #ccc; }
+        :-ms-input-placeholder { color: #ccc; }
         .btn-container {
             display: flex;
             gap: 10px;
             justify-content: center;
             margin: 20px 0;
+            flex-wrap: wrap;
         }
         #generateBtn {
             flex: 1;
@@ -180,6 +192,19 @@
             border: none;
             border-radius: 8px;
             font-size: 17px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        #saveImgBtn {
+            flex: 1;
+            max-width: 200px;
+            padding: 14px 20px;
+            background: linear-gradient(135deg, #4cd964, #5ac8fa);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 17px;
+            font-weight: bold;
             cursor: pointer;
             transition: all 0.3s ease;
         }
@@ -246,6 +271,14 @@
             font-size:14px;
             border-bottom:1px solid rgba(255,255,255,0.1);
         }
+        .title-1{background:linear-gradient(90deg,#ffd700,#fff176);-webkit-background-clip:text;color:transparent;font-weight:bold;}
+        .title-2{background:linear-gradient(90deg,#c0c0c0,#e5e5e5);-webkit-background-clip:text;color:transparent;font-weight:bold;}
+        .title-3{background:linear-gradient(90deg,#cd7f32,#ffb380);-webkit-background-clip:text;color:transparent;font-weight:bold;}
+        .title-4{background:linear-gradient(90deg,#42a5f5,#64b5f6);-webkit-background-clip:text;color:transparent;font-weight:bold;}
+        .title-5{background:linear-gradient(90deg,#7e57c2,#b39ddb);-webkit-background-clip:text;color:transparent;font-weight:bold;}
+        .title-6{background:linear-gradient(90deg,#26a69a,#80cbc4);-webkit-background-clip:text;color:transparent;font-weight:bold;}
+        .title-7{background:linear-gradient(90deg,#ef5350,#ff8a65);-webkit-background-clip:text;color:transparent;font-weight:bold;}
+        .title-8{background:linear-gradient(90deg,#666,#aaa);-webkit-background-clip:text;color:transparent;font-weight:bold;}
         .tip {
             text-align: center;
             font-size: 13px;
@@ -274,7 +307,6 @@
             <h1>FF14 LaGeshi团队团建生成器</h1>
             <p>主职必填 · 副职可选（默认同主职）· 智能通畅度推算 + 排行分析</p>
         </div>
-
         <div class="section">
             <h2 class="section-title">队伍与副本设置</h2>
             <div class="dungeon-select-wrap">
@@ -309,9 +341,7 @@
                     <option value="妖星乱舞绝境战">妖星乱舞绝境战</option>
                 </select>
             </div>
-
             <div class="player-input-area">
-                <!-- 玩家1 -->
                 <div class="player-input">
                     <label>玩家1：</label>
                     <input type="text" placeholder="昵称" id="p1Name">
@@ -320,16 +350,16 @@
                         <option value="tank">防护</option>
                         <option value="healer">治疗</option>
                         <option value="dps">近战DPS</option>
-                        <option value="dps">远程DPS</option>
+                        <option value="ranged">远程DPS</option>
                     </select>
                     <select id="p1Sub">
                         <option value="">默认（同主职）</option>
                         <option value="tank">防护</option>
                         <option value="healer">治疗</option>
-                        <option value="dps">DPS</option>
+                        <option value="dps">近战DPS</option>
+                        <option value="ranged">远程DPS</option>
                     </select>
                 </div>
-                <!-- 玩家2 -->
                 <div class="player-input">
                     <label>玩家2：</label>
                     <input type="text" placeholder="昵称" id="p2Name">
@@ -338,16 +368,16 @@
                         <option value="tank">防护</option>
                         <option value="healer">治疗</option>
                         <option value="dps">近战DPS</option>
-                        <option value="dps">远程DPS</option>
+                        <option value="ranged">远程DPS</option>
                     </select>
                     <select id="p2Sub">
                         <option value="">默认（同主职）</option>
                         <option value="tank">防护</option>
                         <option value="healer">治疗</option>
-                        <option value="dps">DPS</option>
+                        <option value="dps">近战DPS</option>
+                        <option value="ranged">远程DPS</option>
                     </select>
                 </div>
-                <!-- 玩家3 -->
                 <div class="player-input">
                     <label>玩家3：</label>
                     <input type="text" placeholder="昵称" id="p3Name">
@@ -356,16 +386,16 @@
                         <option value="tank">防护</option>
                         <option value="healer">治疗</option>
                         <option value="dps">近战DPS</option>
-                        <option value="dps">远程DPS</option>
+                        <option value="ranged">远程DPS</option>
                     </select>
                     <select id="p3Sub">
                         <option value="">默认（同主职）</option>
                         <option value="tank">防护</option>
                         <option value="healer">治疗</option>
-                        <option value="dps">DPS</option>
+                        <option value="dps">近战DPS</option>
+                        <option value="ranged">远程DPS</option>
                     </select>
                 </div>
-                <!-- 玩家4 -->
                 <div class="player-input">
                     <label>玩家4：</label>
                     <input type="text" placeholder="昵称" id="p4Name">
@@ -374,16 +404,16 @@
                         <option value="tank">防护</option>
                         <option value="healer">治疗</option>
                         <option value="dps">近战DPS</option>
-                        <option value="dps">远程DPS</option>
+                        <option value="ranged">远程DPS</option>
                     </select>
                     <select id="p4Sub">
                         <option value="">默认（同主职）</option>
                         <option value="tank">防护</option>
                         <option value="healer">治疗</option>
-                        <option value="dps">DPS</option>
+                        <option value="dps">近战DPS</option>
+                        <option value="ranged">远程DPS</option>
                     </select>
                 </div>
-                <!-- 玩家5 -->
                 <div class="player-input">
                     <label>玩家5：</label>
                     <input type="text" placeholder="昵称" id="p5Name">
@@ -392,16 +422,16 @@
                         <option value="tank">防护</option>
                         <option value="healer">治疗</option>
                         <option value="dps">近战DPS</option>
-                        <option value="dps">远程DPS</option>
+                        <option value="ranged">远程DPS</option>
                     </select>
                     <select id="p5Sub">
                         <option value="">默认（同主职）</option>
                         <option value="tank">防护</option>
                         <option value="healer">治疗</option>
-                        <option value="dps">DPS</option>
+                        <option value="dps">近战DPS</option>
+                        <option value="ranged">远程DPS</option>
                     </select>
                 </div>
-                <!-- 玩家6 -->
                 <div class="player-input">
                     <label>玩家6：</label>
                     <input type="text" placeholder="昵称" id="p6Name">
@@ -410,16 +440,16 @@
                         <option value="tank">防护</option>
                         <option value="healer">治疗</option>
                         <option value="dps">近战DPS</option>
-                        <option value="dps">远程DPS</option>
+                        <option value="ranged">远程DPS</option>
                     </select>
                     <select id="p6Sub">
                         <option value="">默认（同主职）</option>
                         <option value="tank">防护</option>
                         <option value="healer">治疗</option>
-                        <option value="dps">DPS</option>
+                        <option value="dps">近战DPS</option>
+                        <option value="ranged">远程DPS</option>
                     </select>
                 </div>
-                <!-- 玩家7 -->
                 <div class="player-input">
                     <label>玩家7：</label>
                     <input type="text" placeholder="昵称" id="p7Name">
@@ -428,16 +458,16 @@
                         <option value="tank">防护</option>
                         <option value="healer">治疗</option>
                         <option value="dps">近战DPS</option>
-                        <option value="dps">远程DPS</option>
+                        <option value="ranged">远程DPS</option>
                     </select>
                     <select id="p7Sub">
                         <option value="">默认（同主职）</option>
                         <option value="tank">防护</option>
                         <option value="healer">治疗</option>
-                        <option value="dps">DPS</option>
+                        <option value="dps">近战DPS</option>
+                        <option value="ranged">远程DPS</option>
                     </select>
                 </div>
-                <!-- 玩家8 -->
                 <div class="player-input">
                     <label>玩家8：</label>
                     <input type="text" placeholder="昵称" id="p8Name">
@@ -446,13 +476,14 @@
                         <option value="tank">防护</option>
                         <option value="healer">治疗</option>
                         <option value="dps">近战DPS</option>
-                        <option value="dps">远程DPS</option>
+                        <option value="ranged">远程DPS</option>
                     </select>
                     <select id="p8Sub">
                         <option value="">默认（同主职）</option>
                         <option value="tank">防护</option>
                         <option value="healer">治疗</option>
-                        <option value="dps">DPS</option>
+                        <option value="dps">近战DPS</option>
+                        <option value="ranged">远程DPS</option>
                     </select>
                 </div>
             </div>
@@ -460,42 +491,41 @@
             <div class="btn-container">
                 <button id="generateBtn">生成固定队伍</button>
                 <button id="resetBtn">重置所有内容</button>
+                <button id="saveImgBtn">保存为图片</button>
             </div>
         </div>
-
         <div class="section team-result" id="teamResult">
-            <h2 class="section-title">生成的固定队伍 & 通畅度分析</h2>
-            <div class="raid-dungeon" id="raidDungeon">本次挑战副本：--</div>
-            <div class="team-grid">
-                <div class="job-group">
-                    <h3 class="job-group-title">防护职业（2人）</h3
-                    ><ul class="player-list" id="tankList"></ul>
+            <div id="captureWrap">
+                <h2 class="section-title">生成的固定队伍 & 通畅度分析</h2>
+                <div class="raid-dungeon" id="raidDungeon">本次挑战副本：--</div>
+                <div class="team-grid">
+                    <div class="job-group">
+                        <h3 class="job-group-title">防护职业（2人）</h3>
+                        <ul class="player-list" id="tankList"></ul>
+                    </div>
+                    <div class="job-group">
+                        <h3 class="job-group-title">治疗职业（2人）</h3>
+                        <ul class="player-list" id="healerList"></ul>
+                    </div>
+                    <div class="job-group">
+                        <h3 class="job-group-title">近战DPS（2人）</h3>
+                        <ul class="player-list" id="meleeList"></ul>
+                    </div>
+                    <div class="job-group">
+                        <h3 class="job-group-title">远程DPS（2人）</h3>
+                        <ul class="player-list" id="rangedList"></ul>
+                    </div>
                 </div>
-                <div class="job-group">
-                    <h3 class="job-group-title">治疗职业（2人）</h3>
-                    <ul class="player-list" id="healerList"></ul>
+                <div class="rank-wrap">
+                    <h3 class="job-group-title">LaGeshi通畅度排行榜</h3>
+                    <div id="rankBox"></div>
                 </div>
-                <div class="job-group">
-                    <h3 class="job-group-title">近战DPS（2人）</h3>
-                    <ul class="player-list" id="meleeList"></ul>
+                <div class="tip">
+                    通畅度规则：主职为基础，副职不限制；分配职能强制与自身主职不同
                 </div>
-                <div class="job-group">
-                    <h3 class="job-group-title">远程DPS（2人）</h3>
-                    <ul class="player-list" id="rangedList"></ul>
-                </div>
-            </div>
-
-            <div class="rank-wrap">
-                <h3 class="job-group-title">LaGeshi通畅度排行榜</h3>
-                <div id="rankBox"></div>
-            </div>
-
-            <div class="tip">
-                通畅度规则：主职为基础，副职可选（默认同主职无加成），双职适配加权计算
             </div>
         </div>
     </div>
-
     <script>
         const dungeonList = [
             "艳翼蛇鸟歼殛战","佐拉加歼殛战","泽莲尼娅歼殛战","永恒女王歼殛战",
@@ -504,15 +534,12 @@
             "巴哈姆特绝境战","究极神兵绝境战","亚历山大绝境战","幻想龙诗绝境战",
             "欧米茄绝境验证战","光暗未来绝境战","妖星乱舞绝境战"
         ];
-
         const fixedJobs = {
             tank: ['骑士', '战士', '暗黑骑士', '绝枪战士'],
             healer: ['白魔法师', '占星术士', '贤者', '学者'],
-            dps_melee: ['武士', '武僧', '忍者', '蝰蛇剑士', '龙骑士', '钐镰客'],
-            dps_ranged: ['吟游诗人', '舞者', '机工士','绘灵法师', '黑魔法师', '召唤师', '赤魔法师']
+            dps: ['武士', '武僧', '忍者', '蝰蛇剑士', '龙骑士', '钐镰客'],
+            ranged: ['吟游诗人', '舞者', '机工士','绘灵法师', '黑魔法师', '召唤师', '赤魔法师']
         };
-
-        // 称号对应 1-8 名
         const rankTitles = [
             "喷射战士",
             "螺旋升天式",
@@ -523,78 +550,71 @@
             "憋王之王",
             "铁石心肠"
         ];
-
-        // 主职+副职 双维度计算通畅度（副职为空时默认同主职，无加成）
+        const titleClass = [
+            "title-1","title-2","title-3","title-4",
+            "title-5","title-6","title-7","title-8"
+        ];
+        const roleMap = {
+            tank: "防护",
+            healer: "治疗",
+            dps: "近战DPS",
+            ranged: "远程DPS"
+        };
         function calcSmoothRateWithSub(mainType, subType, toType){
             let baseMin = 0, baseMax = 0;
             let subBonus = 0;
             let reason = "";
-
-            // 副职为空时，默认同主职
             const realSubType = subType || mainType;
-
-            // 基础规则（原逻辑）
             if(mainType === 'tank'){
-                if(toType === 'dps'){
+                if(toType === 'dps' || toType === 'ranged'){
                     baseMin = 75; baseMax = 95;
                     reason = "主职防护转输出，基础适配度高";
                 }else if(toType === 'healer'){
-                    baseMin = 20; baseMax = 45;
-                    reason = "主职防护转治疗，手法节奏差异大";
-                }else{
-                    baseMin = 50; baseMax = 70;
-                    reason = "同职能转职，基础适配中等";
+                    baseMin = 15; baseMax = 40;
+                    reason = "主职防护转治疗，职责与节奏差异极大，适配度低";
                 }
             }
             else if(mainType === 'dps'){
                 if(toType === 'tank' || toType === 'healer'){
                     baseMin = 15; baseMax = 40;
-                    reason = "主职输出转坦/治疗，跨度大基础偏低";
-                }else{
+                    reason = "主职近战转坦/治疗，跨度大基础偏低";
+                }else if(toType === 'ranged'){
                     baseMin = 55; baseMax = 75;
-                    reason = "输出内部转职，基础适配中等偏上";
+                    reason = "近战转远程，同输出适配中等偏上";
+                }
+            }
+            else if(mainType === 'ranged'){
+                if(toType === 'tank' || toType === 'healer'){
+                    baseMin = 15; baseMax = 40;
+                    reason = "主职远程转坦/治疗，跨度大基础偏低";
+                }else if(toType === 'dps'){
+                    baseMin = 55; baseMax = 75;
+                    reason = "远程转近战，同输出适配中等偏上";
                 }
             }
             else if(mainType === 'healer'){
                 if(toType === 'tank'){
-                    baseMin = 70; baseMax = 90;
-                    reason = "主职治疗转防护，大局意识相通";
-                }else if(toType === 'dps'){
+                    baseMin = 15; baseMax = 40;
+                    reason = "主职治疗转防护，职责与操作逻辑差异极大，适配度低";
+                }else if(toType === 'dps' || toType === 'ranged'){
                     baseMin = 40; baseMax = 65;
                     reason = "主职治疗转输出，节奏变化较大";
-                }else{
-                    baseMin =  50; baseMax = 70;
-                    reason = "同治疗转职，基础适配中等";
                 }
             }
-
-            // 副职加成：仅当副职≠主职时生效
-            if(realSubType !== mainType){
-                if(realSubType === toType){
-                    subBonus = Math.floor(Math.random() * 6) + 10;
-                    reason += `；副职同为${getTypeText(toType)}，熟练度加持额外加分`;
-                }else{
-                    subBonus = Math.floor(Math.random() * 4);
-                    reason += `；副职为${getTypeText(realSubType)}，小幅辅助适配`;
-                }
+            if(realSubType === toType){
+                subBonus = Math.floor(Math.random() * 6) + 10;
+                reason += `；副职匹配当前职能，熟练度加分`;
+            }else if(realSubType !== mainType){
+                subBonus = Math.floor(Math.random() * 4);
+                reason += `；副职为${roleMap[realSubType]}，小幅辅助适配`;
             }else{
-                reason += "；无副职（同主职），仅按主职推算";
+                reason += "；无副职差异，仅按主职推算";
             }
-
             let raw = Math.floor(Math.random() * (baseMax - baseMin + 1)) + baseMin;
             let final = Math.min(100, raw + subBonus);
             return { rate: final, reason };
         }
-
-        function getTypeText(t){
-            if(t === 'tank') return '防护';
-            if(t === 'healer') return '治疗';
-            return 'DPS';
-        }
-
         const INPUT_KEY = "FF14_TEAM_FULL_DATA";
-
-        // 保存全部：昵称/主职/副职/副本
         function saveInputToLocal(){
             let data = {
                 dungeon: document.getElementById('dungeonSelect').value,
@@ -609,8 +629,6 @@
             }
             localStorage.setItem(INPUT_KEY, JSON.stringify(data));
         }
-
-        // 加载缓存
         function loadInputFromLocal(){
             let d = localStorage.getItem(INPUT_KEY);
             if(!d) return;
@@ -625,8 +643,6 @@
                 }
             });
         }
-
-        // 自动监听保存
         function bindAutoSave(){
             document.getElementById('dungeonSelect').addEventListener('change', saveInputToLocal);
             for(let i=1;i<=8;i++){
@@ -635,12 +651,10 @@
                 document.getElementById(`p${i}Sub`).addEventListener('change', saveInputToLocal);
             }
         }
-
         function getFinalDungeon(){
             const v = document.getElementById('dungeonSelect').value.trim();
             return v || dungeonList[Math.floor(Math.random() * dungeonList.length)];
         }
-
         function shuffleArray(arr) {
             let a = [...arr];
             for (let i = a.length - 1; i > 0; i--) {
@@ -649,77 +663,46 @@
             }
             return a;
         }
-
-        function getUniqueFixedJobs(list, count) {
-            return shuffleArray(list).slice(0, count);
+        function getValidRoleList(playerMain){
+            return ['tank','healer','dps','ranged'].filter(r => r !== playerMain);
         }
-
-        function collectPlayers() {
-            let ps = [];
-            for(let i=1;i<=8;i++){
-                let name = document.getElementById(`p${i}Name`).value.trim();
-                let main = document.getElementById(`p${i}Main`).value;
-                let sub = document.getElementById(`p${i}Sub`).value;
-                // 校验：昵称和主职必填
-                if(!name || !main) return null;
-                ps.push({
-                    name,
-                    mainType: main,
-                    subType: sub // 副职可为空
-                });
-            }
-            return ps;
-        }
-
         function assignJobs(players) {
-            const res = {tank:[],healer:[],dps_melee:[],dps_ranged:[]};
-            const used = new Set();
-            const sp = shuffleArray(players);
-
-            const tj = getUniqueFixedJobs(fixedJobs.tank,2);
-            assignToRole('tank',tj,sp,res,used);
-
-            const hj = getUniqueFixedJobs(fixedJobs.healer,2);
-            assignToRole('healer',hj,sp,res,used);
-
-            const mj = getUniqueFixedJobs(fixedJobs.dps_melee,2);
-            assignToRole('dps_melee',mj,sp,res,used);
-
-            const rj = getUniqueFixedJobs(fixedJobs.dps_ranged,2);
-            assignToRole('dps_ranged',rj,sp,res,used);
-
+            const res = {tank:[],healer:[],dps:[],ranged:[]};
+            let pool = shuffleArray([...players]);
+            for(let p of pool){
+                if(res.tank.length >= 2) break;
+                if(p.mainType !== 'tank') res.tank.push(p);
+            }
+            for(let p of pool){
+                if(res.healer.length >= 2) break;
+                if(p.mainType !== 'healer' && !res.tank.includes(p)) res.healer.push(p);
+            }
+            for(let p of pool){
+                if(res.dps.length >= 2) break;
+                if(p.mainType !== 'dps' && !res.tank.includes(p) && !res.healer.includes(p)) res.dps.push(p);
+            }
+            for(let p of pool){
+                if(res.ranged.length >= 2) break;
+                if(!res.tank.includes(p) && !res.healer.includes(p) && !res.dps.includes(p)) res.ranged.push(p);
+            }
+            const fillRole = (list, roleKey) => {
+                const jobList = shuffleArray(fixedJobs[roleKey]);
+                list.forEach((p, idx) => {
+                    p.newJob = jobList[idx % jobList.length];
+                    p.newJobType = roleKey;
+                    let score = calcSmoothRateWithSub(p.mainType, p.subType, roleKey);
+                    p.smoothRate = score.rate;
+                    p.smoothReason = score.reason;
+                    p.mainText = roleMap[p.mainType];
+                    p.subText = p.subType ? roleMap[p.subType] : '无（同主职）';
+                });
+            };
+            fillRole(res.tank, 'tank');
+            fillRole(res.healer, 'healer');
+            fillRole(res.dps, 'dps');
+            fillRole(res.ranged, 'ranged');
             return res;
         }
-
-        function assignToRole(roleType, jobList, playerList, res, used){
-            let cnt = 0;
-            let toType = (roleType === 'tank') ? 'tank'
-                        : (roleType === 'healer') ? 'healer' : 'dps';
-
-            let avail = playerList.filter(p => !Object.values(res).flat().some(x=>x.name===p.name));
-            let shuffled = shuffleArray(avail);
-
-            for(let job of jobList){
-                if(cnt >= jobList.length) break;
-                let tar = shuffled.find(p => !used.has(p.name));
-                if(tar){
-                    tar.newJob = job;
-                    tar.newJobType = toType;
-                    // 主职+副职双计算（副职为空自动适配）
-                    let smooth = calcSmoothRateWithSub(tar.mainType, tar.subType, toType);
-                    tar.smoothRate = smooth.rate;
-                    tar.smoothReason = smooth.reason;
-                    tar.mainText = getTypeText(tar.mainType);
-                    tar.subText = tar.subType ? getTypeText(tar.subType) : '无（同主职）';
-
-                    res[roleType].push(tar);
-                    used.add(tar.name);
-                    cnt++;
-                }
-            }
-        }
-
-        // 渲染排行（带称号）
         function renderRank(allPlayer){
             let box = document.getElementById('rankBox');
             box.innerHTML = '';
@@ -728,15 +711,14 @@
                 let item = document.createElement('div');
                 item.className = 'rank-item';
                 let title = rankTitles[idx] || "路人";
-                item.innerHTML = `第${idx+1}名【${title}】：${p.name} — ${p.smoothRate}% | ${p.smoothReason}`;
+                let tClass = titleClass[idx] || "";
+                item.innerHTML = `第${idx+1}名 <span class="${tClass}">【${title}】</span>：${p.name} — ${p.smoothRate}% | ${p.smoothReason}`;
                 box.appendChild(item);
             });
         }
-
         function renderTeam(res){
             document.getElementById('raidDungeon').innerText = '本次挑战副本：'+getFinalDungeon();
-            let all = [...res.tank,...res.healer,...res.dps_melee,...res.dps_ranged];
-
+            let all = [...res.tank,...res.healer,...res.dps,...res.ranged];
             function renderLine(id, list, roleName){
                 let el = document.getElementById(id);
                 el.innerHTML = '';
@@ -754,15 +736,24 @@
                     el.appendChild(li);
                 });
             }
-
             renderLine('tankList',res.tank,'防护');
             renderLine('healerList',res.healer,'治疗');
-            renderLine('meleeList',res.dps_melee,'近战DPS');
-            renderLine('rangedList',res.dps_ranged,'远程DPS');
-
+            renderLine('meleeList',res.dps,'近战DPS');
+            renderLine('rangedList',res.ranged,'远程DPS');
             renderRank(all);
+            document.getElementById('teamResult').style.display='block';
         }
-
+        function collectPlayers() {
+            let ps = [];
+            for(let i=1;i<=8;i++){
+                let name = document.getElementById(`p${i}Name`).value.trim();
+                let main = document.getElementById(`p${i}Main`).value;
+                let sub = document.getElementById(`p${i}Sub`).value;
+                if(!name || !main) return null;
+                ps.push({name,mainType:main,subType:sub});
+            }
+            return ps;
+        }
         function resetAll(){
             localStorage.removeItem(INPUT_KEY);
             document.getElementById('dungeonSelect').value = '';
@@ -775,11 +766,21 @@
             document.getElementById('teamResult').style.display='none';
             document.getElementById('rankBox').innerHTML = '';
         }
-
+        function saveAsImage(){
+            const wrap = document.getElementById('captureWrap');
+            html2canvas(wrap,{
+                backgroundColor: null,
+                scale: 2
+            }).then(canvas=>{
+                let link = document.createElement('a');
+                link.download = 'FF14团建队伍分析.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            });
+        }
         window.onload = function(){
             loadInputFromLocal();
             bindAutoSave();
-
             document.getElementById('generateBtn').onclick = ()=>{
                 const ps = collectPlayers();
                 if(!ps){
@@ -789,10 +790,9 @@
                 document.getElementById('errorTip').style.display='none';
                 const teamRes = assignJobs(ps);
                 renderTeam(teamRes);
-                document.getElementById('teamResult').style.display='block';
             };
-
             document.getElementById('resetBtn').onclick = resetAll;
+            document.getElementById('saveImgBtn').onclick = saveAsImage;
         };
     </script>
 </body>
