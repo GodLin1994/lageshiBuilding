@@ -110,20 +110,22 @@
         .player-input {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             background: rgba(255, 255, 255, 0.05);
             padding: 12px;
             border-radius: 8px;
             width: 100%;
+            flex-wrap: wrap;
         }
         .player-input label {
             font-size: 14px;
             color: #ffd700;
-            width: 70px;
+            width: 60px;
             flex-shrink: 0;
         }
         .player-input input {
             flex: 1;
+            min-width: 100px;
             padding: 8px 10px;
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 6px;
@@ -131,18 +133,15 @@
             color: #fff;
             font-size: 13px;
             outline: none;
-            min-width: 0;
         }
         .player-input select {
-            flex: 1;
-            padding: 8px 10px;
+            padding: 8px 6px;
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 6px;
             background: rgba(0, 0, 0, 0.6);
             color: #fff;
             font-size: 13px;
             outline: none;
-            min-width: 0;
         }
         .player-input select option {
             background: #333;
@@ -202,7 +201,6 @@
             margin-top: 15px;
         }
         .job-group {
-            background: rgba0,0,0,0.6;
             background: rgba(0, 0, 0, 0.6);
             border-radius: 10px;
             padding: 15px;
@@ -274,7 +272,7 @@
     <div class="container">
         <div class="header">
             <h1>FF14 LaGeshi团队团建生成器</h1>
-            <p>输入8位玩家信息，智能推算转职通畅度 + 排行分析</p>
+            <p>主职必填 · 副职可选（默认同主职）· 智能通畅度推算 + 排行分析</p>
         </div>
 
         <div class="section">
@@ -313,96 +311,152 @@
             </div>
 
             <div class="player-input-area">
+                <!-- 玩家1 -->
                 <div class="player-input">
                     <label>玩家1：</label>
-                    <input type="text" placeholder="输入玩家昵称" id="player1Name">
-                    <select id="player1Job">
-                        <option value="">选择初始职能</option>
-                        <option value="tank">防护（T）</option>
-                        <option value="healer">治疗（H）</option>
-                        <option value="dps_melee">近战DPS</option>
-                        <option value="dps_ranged">远程DPS</option>
+                    <input type="text" placeholder="昵称" id="p1Name">
+                    <select id="p1Main">
+                        <option value="">主职</option>
+                        <option value="tank">防护</option>
+                        <option value="healer">治疗</option>
+                        <option value="dps">近战DPS</option>
+                        <option value="dps">远程DPS</option>
+                    </select>
+                    <select id="p1Sub">
+                        <option value="">默认（同主职）</option>
+                        <option value="tank">防护</option>
+                        <option value="healer">治疗</option>
+                        <option value="dps">DPS</option>
                     </select>
                 </div>
+                <!-- 玩家2 -->
                 <div class="player-input">
                     <label>玩家2：</label>
-                    <input type="text" placeholder="输入玩家昵称" id="player2Name">
-                    <select id="player2Job">
-                        <option value="">选择初始职能</option>
-                        <option value="tank">防护（T）</option>
-                        <option value="healer">治疗（H）</option>
-                        <option value="dps_melee">近战DPS</option>
-                        <option value="dps_ranged">远程DPS</option>
+                    <input type="text" placeholder="昵称" id="p2Name">
+                    <select id="p2Main">
+                        <option value="">主职</option>
+                        <option value="tank">防护</option>
+                        <option value="healer">治疗</option>
+                        <option value="dps">近战DPS</option>
+                        <option value="dps">远程DPS</option>
+                    </select>
+                    <select id="p2Sub">
+                        <option value="">默认（同主职）</option>
+                        <option value="tank">防护</option>
+                        <option value="healer">治疗</option>
+                        <option value="dps">DPS</option>
                     </select>
                 </div>
+                <!-- 玩家3 -->
                 <div class="player-input">
                     <label>玩家3：</label>
-                    <input type="text" placeholder="输入玩家昵称" id="player3Name">
-                    <select id="player3Job">
-                        <option value="">选择初始职能</option>
-                        <option value="tank">防护（T）</option>
-                        <option value="healer">治疗（H）</option>
-                        <option value="dps_melee">近战DPS</option>
-                        <option value="dps_ranged">远程DPS</option>
+                    <input type="text" placeholder="昵称" id="p3Name">
+                    <select id="p3Main">
+                        <option value="">主职</option>
+                        <option value="tank">防护</option>
+                        <option value="healer">治疗</option>
+                        <option value="dps">近战DPS</option>
+                        <option value="dps">远程DPS</option>
+                    </select>
+                    <select id="p3Sub">
+                        <option value="">默认（同主职）</option>
+                        <option value="tank">防护</option>
+                        <option value="healer">治疗</option>
+                        <option value="dps">DPS</option>
                     </select>
                 </div>
+                <!-- 玩家4 -->
                 <div class="player-input">
                     <label>玩家4：</label>
-                    <input type="text" placeholder="输入玩家昵称" id="player4Name">
-                    <select id="player4Job">
-                        <option value="">选择初始职能</option>
-                        <option value="tank">防护（T）</option>
-                        <option value="healer">治疗（H）</option>
-                        <option value="dps_melee">近战DPS</option>
-                        <option value="dps_ranged">远程DPS</option>
+                    <input type="text" placeholder="昵称" id="p4Name">
+                    <select id="p4Main">
+                        <option value="">主职</option>
+                        <option value="tank">防护</option>
+                        <option value="healer">治疗</option>
+                        <option value="dps">近战DPS</option>
+                        <option value="dps">远程DPS</option>
+                    </select>
+                    <select id="p4Sub">
+                        <option value="">默认（同主职）</option>
+                        <option value="tank">防护</option>
+                        <option value="healer">治疗</option>
+                        <option value="dps">DPS</option>
                     </select>
                 </div>
+                <!-- 玩家5 -->
                 <div class="player-input">
                     <label>玩家5：</label>
-                    <input type="text" placeholder="输入玩家昵称" id="player5Name">
-                    <select id="player5Job">
-                        <option value="">选择初始职能</option>
-                        <option value="tank">防护（T）</option>
-                        <option value="healer">治疗（H）</option>
-                        <option value="dps_melee">近战DPS</option>
-                        <option value="dps_ranged">远程DPS</option>
+                    <input type="text" placeholder="昵称" id="p5Name">
+                    <select id="p5Main">
+                        <option value="">主职</option>
+                        <option value="tank">防护</option>
+                        <option value="healer">治疗</option>
+                        <option value="dps">近战DPS</option>
+                        <option value="dps">远程DPS</option>
+                    </select>
+                    <select id="p5Sub">
+                        <option value="">默认（同主职）</option>
+                        <option value="tank">防护</option>
+                        <option value="healer">治疗</option>
+                        <option value="dps">DPS</option>
                     </select>
                 </div>
+                <!-- 玩家6 -->
                 <div class="player-input">
                     <label>玩家6：</label>
-                    <input type="text" placeholder="输入玩家昵称" id="player6Name">
-                    <select id="player6Job">
-                        <option value="">选择初始职能</option>
-                        <option value="tank">防护（T）</option>
-                        <option value="healer">治疗（H）</option>
-                        <option value="dps_melee">近战DPS</option>
-                        <option value="dps_ranged">远程DPS</option>
+                    <input type="text" placeholder="昵称" id="p6Name">
+                    <select id="p6Main">
+                        <option value="">主职</option>
+                        <option value="tank">防护</option>
+                        <option value="healer">治疗</option>
+                        <option value="dps">近战DPS</option>
+                        <option value="dps">远程DPS</option>
+                    </select>
+                    <select id="p6Sub">
+                        <option value="">默认（同主职）</option>
+                        <option value="tank">防护</option>
+                        <option value="healer">治疗</option>
+                        <option value="dps">DPS</option>
                     </select>
                 </div>
+                <!-- 玩家7 -->
                 <div class="player-input">
                     <label>玩家7：</label>
-                    <input type="text" placeholder="输入玩家昵称" id="player7Name">
-                    <select id="player7Job">
-                        <option value="">选择初始职能</option>
-                        <option value="tank">防护（T）</option>
-                        <option value="healer">治疗（H）</option>
-                        <option value="dps_melee">近战DPS</option>
-                        <option value="dps_ranged">远程DPS</option>
+                    <input type="text" placeholder="昵称" id="p7Name">
+                    <select id="p7Main">
+                        <option value="">主职</option>
+                        <option value="tank">防护</option>
+                        <option value="healer">治疗</option>
+                        <option value="dps">近战DPS</option>
+                        <option value="dps">远程DPS</option>
+                    </select>
+                    <select id="p7Sub">
+                        <option value="">默认（同主职）</option>
+                        <option value="tank">防护</option>
+                        <option value="healer">治疗</option>
+                        <option value="dps">DPS</option>
                     </select>
                 </div>
+                <!-- 玩家8 -->
                 <div class="player-input">
                     <label>玩家8：</label>
-                    <input type="text" placeholder="输入玩家昵称" id="player8Name">
-                    <select id="player8Job">
-                        <option value="">选择初始职能</option>
-                        <option value="tank">防护（T）</option>
-                        <option value="healer">治疗（H）</option>
-                        <option value="dps_melee">近战DPS</option>
-                        <option value="dps_ranged">远程DPS</option>
+                    <input type="text" placeholder="昵称" id="p8Name">
+                    <select id="p8Main">
+                        <option value="">主职</option>
+                        <option value="tank">防护</option>
+                        <option value="healer">治疗</option>
+                        <option value="dps">近战DPS</option>
+                        <option value="dps">远程DPS</option>
+                    </select>
+                    <select id="p8Sub">
+                        <option value="">默认（同主职）</option>
+                        <option value="tank">防护</option>
+                        <option value="healer">治疗</option>
+                        <option value="dps">DPS</option>
                     </select>
                 </div>
             </div>
-            <div class="error-tip" id="errorTip">请填写完整8位玩家的昵称和初始职能！</div>
+            <div class="error-tip" id="errorTip">请填全8位玩家：昵称+主职必填，副职可选！</div>
             <div class="btn-container">
                 <button id="generateBtn">生成固定队伍</button>
                 <button id="resetBtn">重置所有内容</button>
@@ -414,8 +468,8 @@
             <div class="raid-dungeon" id="raidDungeon">本次挑战副本：--</div>
             <div class="team-grid">
                 <div class="job-group">
-                    <h3 class="job-group-title">防护职业（2人）</h3>
-                    <ul class="player-list" id="tankList"></ul>
+                    <h3 class="job-group-title">防护职业（2人）</h3
+                    ><ul class="player-list" id="tankList"></ul>
                 </div>
                 <div class="job-group">
                     <h3 class="job-group-title">治疗职业（2人）</h3>
@@ -431,14 +485,13 @@
                 </div>
             </div>
 
-            <!-- 通畅度排行 -->
             <div class="rank-wrap">
-                <h3 class="job-group-title">Lashi通畅度排行榜</h3>
+                <h3 class="job-group-title">LaGeshi通畅度排行榜</h3>
                 <div id="rankBox"></div>
             </div>
 
             <div class="tip">
-                职业分配规则：防护/治疗/DPS智能转职，通畅度按职能转职逻辑智能推算并给出原因分析
+                通畅度规则：主职为基础，副职可选（默认同主职无加成），双职适配加权计算
             </div>
         </div>
     </div>
@@ -456,101 +509,130 @@
             tank: ['骑士', '战士', '暗黑骑士', '绝枪战士'],
             healer: ['白魔法师', '占星术士', '贤者', '学者'],
             dps_melee: ['武士', '武僧', '忍者', '蝰蛇剑士', '龙骑士', '钐镰客'],
-            dps_ranged: { group1: ['吟游诗人', '舞者', '机工士'], group2: ['绘灵法师', '黑魔法师', '召唤师', '赤魔法师'] }
+            dps_ranged: ['吟游诗人', '舞者', '机工士','绘灵法师', '黑魔法师', '召唤师', '赤魔法师']
         };
 
-        // 职能大类映射
-        function getJobType(jobName){
-            if(fixedJobs.tank.includes(jobName)) return 'tank';
-            if(fixedJobs.healer.includes(jobName)) return 'healer';
-            if(fixedJobs.dps_melee.includes(jobName)) return 'dps';
-            return 'dps';
-        }
+        // 称号对应 1-8 名
+        const rankTitles = [
+            "喷射战士",
+            "螺旋升天式",
+            "黄金喷射机",
+            "水漫金山",
+            "挤牙膏战士",
+            "千呼万唤屎出来",
+            "憋王之王",
+            "铁石心肠"
+        ];
 
-        // 按转职逻辑计算通畅度 + 分析理由
-        function calcSmoothRate(fromType, toType){
-            let base = 0, min, max, reason = "";
+        // 主职+副职 双维度计算通畅度（副职为空时默认同主职，无加成）
+        function calcSmoothRateWithSub(mainType, subType, toType){
+            let baseMin = 0, baseMax = 0;
+            let subBonus = 0;
+            let reason = "";
 
-            // 规则：
-            // 防护 → DPS：高
-            // DPS → 防护/治疗：低
-            // 治疗 → 防护：高
-            // 防护 → 治疗：低
-            // 同类型：中等
+            // 副职为空时，默认同主职
+            const realSubType = subType || mainType;
 
-            if(fromType === 'tank'){
+            // 基础规则（原逻辑）
+            if(mainType === 'tank'){
                 if(toType === 'dps'){
-                    min = 75; max = 95;
-                    reason = "防护转输出职能，操作逻辑相近，Lashi适配度高";
+                    baseMin = 75; baseMax = 95;
+                    reason = "主职防护转输出，基础适配度高";
                 }else if(toType === 'healer'){
-                    min = 20; max = 45;
-                    reason = "防护转治疗职能，手法节奏差异大，Lashi通畅度偏低";
+                    baseMin = 20; baseMax = 45;
+                    reason = "主职防护转治疗，手法节奏差异大";
                 }else{
-                    min = 50; max = 70;
-                    reason = "同职能转职，适配度中等";
+                    baseMin = 50; baseMax = 70;
+                    reason = "同职能转职，基础适配中等";
                 }
             }
-            else if(fromType === 'dps'){
+            else if(mainType === 'dps'){
                 if(toType === 'tank' || toType === 'healer'){
-                    min = 15; max = 40;
-                    reason = "输出转坦/治疗，责任与操作逻辑跨度大，Lashi很难适应";
+                    baseMin = 15; baseMax = 40;
+                    reason = "主职输出转坦/治疗，跨度大基础偏低";
                 }else{
-                    min = 55; max = 75;
-                    reason = "输出内部转职，玩法相近，通畅度中等偏上";
+                    baseMin = 55; baseMax = 75;
+                    reason = "输出内部转职，基础适配中等偏上";
                 }
             }
-            else if(fromType === 'healer'){
+            else if(mainType === 'healer'){
                 if(toType === 'tank'){
-                    min = 70; max = 90;
-                    reason = "治疗转防护，大局意识相通，Lashi适配流畅";
+                    baseMin = 70; baseMax = 90;
+                    reason = "主职治疗转防护，大局意识相通";
                 }else if(toType === 'dps'){
-                    min = 40; max = 65;
-                    reason = "治疗转输出，节奏变化较大，通畅度一般";
+                    baseMin = 40; baseMax = 65;
+                    reason = "主职治疗转输出，节奏变化较大";
                 }else{
-                    min = 50; max = 70;
-                    reason = "同治疗职能转职，适配度中等";
+                    baseMin =  50; baseMax = 70;
+                    reason = "同治疗转职，基础适配中等";
                 }
             }
 
-            let rate = Math.floor(Math.random()*(max-min+1)) + min;
-            return { rate, reason };
+            // 副职加成：仅当副职≠主职时生效
+            if(realSubType !== mainType){
+                if(realSubType === toType){
+                    subBonus = Math.floor(Math.random() * 6) + 10;
+                    reason += `；副职同为${getTypeText(toType)}，熟练度加持额外加分`;
+                }else{
+                    subBonus = Math.floor(Math.random() * 4);
+                    reason += `；副职为${getTypeText(realSubType)}，小幅辅助适配`;
+                }
+            }else{
+                reason += "；无副职（同主职），仅按主职推算";
+            }
+
+            let raw = Math.floor(Math.random() * (baseMax - baseMin + 1)) + baseMin;
+            let final = Math.min(100, raw + subBonus);
+            return { rate: final, reason };
         }
 
-        const INPUT_KEY = "FF14_TEAM_INPUT_DATA";
+        function getTypeText(t){
+            if(t === 'tank') return '防护';
+            if(t === 'healer') return '治疗';
+            return 'DPS';
+        }
 
+        const INPUT_KEY = "FF14_TEAM_FULL_DATA";
+
+        // 保存全部：昵称/主职/副职/副本
         function saveInputToLocal(){
             let data = {
                 dungeon: document.getElementById('dungeonSelect').value,
                 players: []
             };
-            for(let i=1; i<=8; i++){
+            for(let i=1;i<=8;i++){
                 data.players.push({
-                    name: document.getElementById(`player${i}Name`).value,
-                    job: document.getElementById(`player${i}Job`).value
+                    name: document.getElementById(`p${i}Name`).value,
+                    main: document.getElementById(`p${i}Main`).value,
+                    sub: document.getElementById(`p${i}Sub`).value
                 });
             }
             localStorage.setItem(INPUT_KEY, JSON.stringify(data));
         }
 
+        // 加载缓存
         function loadInputFromLocal(){
-            let data = localStorage.getItem(INPUT_KEY);
-            if(!data) return;
-            data = JSON.parse(data);
+            let d = localStorage.getItem(INPUT_KEY);
+            if(!d) return;
+            let data = JSON.parse(d);
             document.getElementById('dungeonSelect').value = data.dungeon || '';
-            data.players.forEach((p, i)=>{
-                let n = i+1;
-                if(document.getElementById(`player${n}Name`)){
-                    document.getElementById(`player${n}Name`).value = p.name || '';
-                    document.getElementById(`player${n}Job`).value = p.job || '';
+            data.players.forEach((p,idx)=>{
+                let i = idx+1;
+                if(document.getElementById(`p${i}Name`)){
+                    document.getElementById(`p${i}Name`).value = p.name || '';
+                    document.getElementById(`p${i}Main`).value = p.main || '';
+                    document.getElementById(`p${i}Sub`).value = p.sub || '';
                 }
             });
         }
 
+        // 自动监听保存
         function bindAutoSave(){
             document.getElementById('dungeonSelect').addEventListener('change', saveInputToLocal);
-            for(let i=1; i<=8; i++){
-                document.getElementById(`player${i}Name`).addEventListener('input', saveInputToLocal);
-                document.getElementById(`player${i}Job`).addEventListener('change', saveInputToLocal);
+            for(let i=1;i<=8;i++){
+                document.getElementById(`p${i}Name`).addEventListener('input', saveInputToLocal);
+                document.getElementById(`p${i}Main`).addEventListener('change', saveInputToLocal);
+                document.getElementById(`p${i}Sub`).addEventListener('change', saveInputToLocal);
             }
         }
 
@@ -572,18 +654,19 @@
             return shuffleArray(list).slice(0, count);
         }
 
-        function getJobText(k) {
-            const m = {tank:'防护（T）',healer:'治疗（H）',dps_melee:'近战DPS',dps_ranged:'远程DPS'};
-            return m[k]||k;
-        }
-
         function collectPlayers() {
             let ps = [];
             for(let i=1;i<=8;i++){
-                const n = document.getElementById(`player${i}Name`).value.trim();
-                const j = document.getElementById(`player${i}Job`).value;
-                if(!n || !j) return null;
-                ps.push({name:n, originalJob:j, originalJobText:getJobText(j)});
+                let name = document.getElementById(`p${i}Name`).value.trim();
+                let main = document.getElementById(`p${i}Main`).value;
+                let sub = document.getElementById(`p${i}Sub`).value;
+                // 校验：昵称和主职必填
+                if(!name || !main) return null;
+                ps.push({
+                    name,
+                    mainType: main,
+                    subType: sub // 副职可为空
+                });
             }
             return ps;
         }
@@ -594,86 +677,89 @@
             const sp = shuffleArray(players);
 
             const tj = getUniqueFixedJobs(fixedJobs.tank,2);
-            assign('tank',tj,sp,res,used);
+            assignToRole('tank',tj,sp,res,used);
 
             const hj = getUniqueFixedJobs(fixedJobs.healer,2);
-            assign('healer',hj,sp,res,used);
+            assignToRole('healer',hj,sp,res,used);
 
             const mj = getUniqueFixedJobs(fixedJobs.dps_melee,2);
-            assign('dps_melee',mj,sp,res,used);
+            assignToRole('dps_melee',mj,sp,res,used);
 
-            const rj = [shuffleArray(fixedJobs.dps_ranged.group1)[0]];
-            let g2;
-            do{g2=shuffleArray(fixedJobs.dps_ranged.group2)[0]}while(used.has(g2));
-            rj.push(g2);
-            assign('dps_ranged',rj,sp,res,used);
+            const rj = getUniqueFixedJobs(fixedJobs.dps_ranged,2);
+            assignToRole('dps_ranged',rj,sp,res,used);
 
             return res;
         }
 
-        function assign(t,list,p,res,used){
-            let c=0;
-            const av = p.filter(x=>x.originalJob!==t);
-            const sa = shuffleArray(av);
-            for(const j of list){
-                if(c>=list.length)break;
-                const tar = sa.find(x=>!Object.values(res).flat().some(m=>m.name===x.name));
+        function assignToRole(roleType, jobList, playerList, res, used){
+            let cnt = 0;
+            let toType = (roleType === 'tank') ? 'tank'
+                        : (roleType === 'healer') ? 'healer' : 'dps';
+
+            let avail = playerList.filter(p => !Object.values(res).flat().some(x=>x.name===p.name));
+            let shuffled = shuffleArray(avail);
+
+            for(let job of jobList){
+                if(cnt >= jobList.length) break;
+                let tar = shuffled.find(p => !used.has(p.name));
                 if(tar){
-                    tar.newJob = j;
-                    tar.newJobType = t === 'tank' ? 'tank' : t === 'healer' ? 'healer' : 'dps';
-                    tar.fromType = tar.originalJob === 'tank' ? 'tank' 
-                                 : tar.originalJob === 'healer' ? 'healer' : 'dps';
-                    // 计算通畅度和理由
-                    let smooth = calcSmoothRate(tar.fromType, tar.newJobType);
+                    tar.newJob = job;
+                    tar.newJobType = toType;
+                    // 主职+副职双计算（副职为空自动适配）
+                    let smooth = calcSmoothRateWithSub(tar.mainType, tar.subType, toType);
                     tar.smoothRate = smooth.rate;
                     tar.smoothReason = smooth.reason;
+                    tar.mainText = getTypeText(tar.mainType);
+                    tar.subText = tar.subType ? getTypeText(tar.subType) : '无（同主职）';
 
-                    res[t].push(tar);
-                    used.add(j);
-                    c++;
+                    res[roleType].push(tar);
+                    used.add(tar.name);
+                    cnt++;
                 }
             }
         }
 
-        // 渲染排行
+        // 渲染排行（带称号）
         function renderRank(allPlayer){
             let box = document.getElementById('rankBox');
             box.innerHTML = '';
-            // 降序排序
             let sortList = allPlayer.sort((a,b)=>b.smoothRate - a.smoothRate);
             sortList.forEach((p,idx)=>{
                 let item = document.createElement('div');
                 item.className = 'rank-item';
-                item.innerHTML = `第${idx+1}名：${p.name} — ${p.smoothRate}% | ${p.smoothReason}`;
+                let title = rankTitles[idx] || "路人";
+                item.innerHTML = `第${idx+1}名【${title}】：${p.name} — ${p.smoothRate}% | ${p.smoothReason}`;
                 box.appendChild(item);
             });
         }
 
         function renderTeam(res){
             document.getElementById('raidDungeon').innerText = '本次挑战副本：'+getFinalDungeon();
-            // 合并所有玩家用于排行
             let all = [...res.tank,...res.healer,...res.dps_melee,...res.dps_ranged];
 
-            function r(id,dt,t){
-                const el=document.getElementById(id);el.innerHTML='';
-                dt.forEach(p=>{
-                    const li=document.createElement('li');li.className='player-item';
+            function renderLine(id, list, roleName){
+                let el = document.getElementById(id);
+                el.innerHTML = '';
+                list.forEach(p=>{
+                    let li = document.createElement('li');
+                    li.className = 'player-item';
                     let colorClass = p.smoothRate >=70 ? 'smooth-high' : p.smoothRate >=40 ? 'smooth-mid' : 'smooth-low';
-                    li.innerHTML=`
+                    li.innerHTML = `
                         <span>${p.name}</span>
-                        <span>原职能：${p.originalJobText} → 新职能：${t}（${p.newJob}）</span>
-                        <span class="${colorClass}">Lashi通畅度预测：${p.smoothRate}%</span>
+                        <span>主职：${p.mainText} ｜ 副职：${p.subText}</span>
+                        <span>转职目标：${roleName}（${p.newJob}）</span>
+                        <span class="${colorClass}">LaGeshi通畅度预测：${p.smoothRate}%</span>
                         <span>分析：${p.smoothReason}</span>
                     `;
                     el.appendChild(li);
                 });
             }
-            r('tankList',res.tank,'防护');
-            r('healerList',res.healer,'治疗');
-            r('meleeList',res.dps_melee,'近战DPS');
-            r('rangedList',res.dps_ranged,'远程DPS');
 
-            // 渲染排行榜
+            renderLine('tankList',res.tank,'防护');
+            renderLine('healerList',res.healer,'治疗');
+            renderLine('meleeList',res.dps_melee,'近战DPS');
+            renderLine('rangedList',res.dps_ranged,'远程DPS');
+
             renderRank(all);
         }
 
@@ -681,12 +767,12 @@
             localStorage.removeItem(INPUT_KEY);
             document.getElementById('dungeonSelect').value = '';
             for(let i=1;i<=8;i++){
-                document.getElementById(`player${i}Name`).value='';
-                document.getElementById(`player${i}Job`).value='';
+                document.getElementById(`p${i}Name`).value='';
+                document.getElementById(`p${i}Main`).value='';
+                document.getElementById(`p${i}Sub`).value='';
             }
             document.getElementById('errorTip').style.display='none';
             document.getElementById('teamResult').style.display='none';
-            document.getElementById('raidDungeon').innerText='本次挑战副本：--';
             document.getElementById('rankBox').innerHTML = '';
         }
 
